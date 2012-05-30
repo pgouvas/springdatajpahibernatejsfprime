@@ -20,10 +20,10 @@
      <import resource="infrastructure.xml" /> 
      
      <!-- Handles @Autowired -->
-     <!-- <context:annotation-config />  -->     
+     <context:annotation-config />     
     
      <!-- identifies beans (@Repository @Service etc) -->
-     <!-- <context:component-scan base-package="gr.army.usermanagement.dao" /> -->
+     <context:component-scan base-package="gr.army.usermanagement.backingbeans" />
      
      <jpa:repositories base-package="gr.army.usermanagement.dao" />
 

@@ -17,6 +17,12 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>  
 
+    <listener> 
+    <listener-class>
+        org.springframework.web.context.request.RequestContextListener
+    </listener-class>  
+    </listener>
+
         <!-- General JSF configuration -->
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
@@ -25,6 +31,11 @@
     <context-param>
         <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
         <param-value>client</param-value>
+    </context-param>
+
+    <context-param>
+    <param-name>com.sun.faces.expressionFactory</param-name>
+    <param-value>com.sun.el.ExpressionFactoryImpl</param-value>
     </context-param>
 
         <!-- Primefaces specific -->

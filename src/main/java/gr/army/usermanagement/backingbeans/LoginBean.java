@@ -5,20 +5,24 @@ package gr.army.usermanagement.backingbeans;
  * @author Panagiotis Gouvas
  */
 import gr.army.usermanagement.dao.UserRepository;
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-
+@Component
 @ManagedBean(name = "LoginBean")
-public class LoginBean {
+@RequestScoped
+public class LoginBean implements Serializable{
     
     protected final Log log = LogFactory.getLog(getClass());
     
     @Autowired
-    UserRepository userdao;
+    private UserRepository userdao;
     
     private String username;
     private String password;
@@ -59,7 +63,8 @@ public class LoginBean {
 
     public void validateUser() {
         log.info("validateUser() invoked with username:"+username+" and password:"+password);
-        userdao.findByUserIdAndDorCode(username, new Long(password) );
+        getUserdao().findAll();
+        //userdao.findByUserIdAndDorCode(username, new Long(password) );
         
         /*
         model.User user = null;
@@ -82,6 +87,20 @@ public class LoginBean {
 
     public void logoutUser() {
 
+    }
+
+    /**
+     * @return the userdao
+     */
+    public UserRepository getUserdao() {
+        return userdao;
+    }
+
+    /**
+     * @param userdao the userdao to set
+     */
+    public void setUserdao(UserRepository userdao) {
+        this.userdao = userdao;
     }
     
 }//EoC

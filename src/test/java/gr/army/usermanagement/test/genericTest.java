@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Panagiotis Gouvas ( KEPYES 29/5/2012 )
  * Please note that in @ContextConfiguration the file: notation is used instead of the class:
  */
-//@Ignore
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:**/WEB-INF/applicationContext.xml"})
 public class genericTest {
@@ -37,7 +37,7 @@ public class genericTest {
         Assert.assertNotNull(userdao);
     }
     
-    @Test
+    //@Test
     //@Transactional
     public void addUser(){
         Random rand = new Random();

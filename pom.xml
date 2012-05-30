@@ -161,20 +161,7 @@
             <version>${cglib.version}</version>
             <scope>runtime</scope>
         </dependency>
-        
-        <!-- Sun JSF implementation -->
-        <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-api</artifactId>
-            <version>${jsf.version}</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.sun.faces</groupId>
-            <artifactId>jsf-impl</artifactId>
-            <version>${jsf.version}</version>
-        </dependency>
-        
+                
         <!-- JSF PrimeFaces  -->
         
         <dependency>
@@ -189,30 +176,6 @@
                 <version>${primefaces.theme.version}</version>
         </dependency>        
         
-        <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>jstl</artifactId>
-                <version>1.2</version>
-        </dependency>
-
-        <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>2.5</version>
-        </dependency>
-
-        <dependency>
-                <groupId>javax.servlet.jsp</groupId>
-                <artifactId>jsp-api</artifactId>
-                <version>2.1</version>
-        </dependency>
-
-        <dependency>
-                <groupId>com.sun.el</groupId>
-                <artifactId>el-ri</artifactId>
-                <version>1.0</version>
-        </dependency>        
-        
         <!-- JUnit -->
         
         <dependency>
@@ -220,8 +183,46 @@
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
-        </dependency>
+        </dependency>        
         
+        <!-- Server Side libs that need to be excluded  -->
+        
+        <!-- JSF implementation -->
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+ 
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+ 
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+ 
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+ 
+                <dependency>
+                    <groupId>org.glassfish.web</groupId>
+                    <artifactId>el-impl</artifactId>
+                    <version>2.2</version>
+                </dependency>           
+               
     </dependencies>
     
     <repositories>
@@ -234,20 +235,20 @@
     </repositories>
         
     
-  <!--
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.4.3</version>
-				<configuration>
-					<includes>
-						<include>**/*.java</include>
-					</includes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-  -->
+<build>  
+    <plugins>
+            <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.3.1</version>
+                    <configuration>
+                            <source>1.6</source>
+                            <target>1.6</target>
+                    </configuration>
+            </plugin>
+    </plugins>
+    
+  </build> 
+  
+  
 </project>
