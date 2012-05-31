@@ -12,15 +12,15 @@
             <ui:define name="title"> Επιλογή Χρηστών </ui:define>
             <ui:define name="content">
 
-                <h:form id="form">  
+                <h:form id="listform">  
                     
-                    <p:commandButton id="showDialogButton" type="button" value="Δημιουργία νέου χρήστη" onclick="newuserdlg.show()" />
+                    <p:commandButton id="showDialogButton"  value="Δημιουργία νέου χρήστη"  actionListener="#{userListBean.resetNewUser}" oncomplete="newuserdlg.show()" /> 
                     
                     <p:dataTable id="userTable" var="user" value="#{userListBean.allItems}" paginator="true" rows="10"  
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
                                  rowsPerPageTemplate="5,10,15" selectionMode="single"  selection="#{userListBean.selectedItem}"   > 
 
-                        <p:ajax event="rowSelect" listener="#{userListBean.onRowSelect}" update=":form:display" oncomplete="userDialog.show()" /> 
+                        <p:ajax event="rowSelect" listener="#{userListBean.onRowSelect}" update=":listform:display" oncomplete="userDialog.show()" /> 
 
                         <p:column headerText="Α/Α" sortBy="#{user.userId}" filterBy="#{user.userId}">  
                             <h:outputText value="#{user.userId}" />  
@@ -44,8 +44,7 @@
 
                     </p:dataTable>  
 
-                    <p:dialog header="Πληροφορίες Χρήστη" widgetVar="userDialog" resizable="false"  
-                            showEffect="explode" hideEffect="explode">  
+                    <p:dialog header="Πληροφορίες Χρήστη" widgetVar="userDialog" resizable="false"  modal="true" showEffect="explode" hideEffect="explode">  
 
                         <h:panelGrid id="display" columns="2" cellpadding="4">  
 
@@ -66,55 +65,73 @@
 
                         </h:panelGrid>  
                     </p:dialog>    
-
-                    <p:dialog header="Δημιουργία νέου Χρήστη" widgetVar="newuserdlg" resizable="false">  
-
-                            <h:panelGrid columns="2" style="margin-bottom:10px"> 
+                    
+                 </h:form>
+                
+                 <h:form id="newuserform">
+                     
+                    <p:dialog header="Δημιουργία νέου Χρήστη" widgetVar="newuserdlg" resizable="false" modal="true" visible="#{not empty facesContext.maximumSeverity}" >  
+                            
+                        <p:ajax event="close" listener="#{userListBean.resetNewUser}"/> 
+                        
+                            <p:messages id="msgs"/>  
+                             
+                            <h:panelGrid id="newusergrid" columns="3" style="margin-bottom:10px"> 
 
                                 <h:outputLabel for="bathmos" value="Βαθμός:" />  
                                 <p:inputText id="bathmos" value="#{userListBean.newuser.bathmos}" />  
-
+                                <p:message for="bathmos" /> 
+                                
                                 <h:outputLabel for="oplo" value="Όπλο:" />  
                                 <p:inputText id="oplo" value="#{userListBean.newuser.tmhma}" />                          
-
+                                <p:message for="oplo" /> 
+                                
                                 <h:outputLabel for="am" value="Αριθμός Μητρώου:" />  
                                 <p:inputText id="am" value="#{userListBean.newuser.am}" />                             
-
+                                <p:message for="am" /> 
+                                
                                 <h:outputLabel for="epitheto" value="Επίθετο:" />  
                                 <p:inputText id="epitheto" value="#{userListBean.newuser.epwnymo}" />                            
-
+                                <p:message for="epitheto" /> 
+                                
                                 <h:outputLabel for="onoma" value="Όνομα:" />  
                                 <p:inputText id="onoma" value="#{userListBean.newuser.onomaXrhsth}" />                            
-
+                                <p:message for="onoma" /> 
+                                
                                 <h:outputLabel for="thesi" value="Θέση:" />  
                                 <p:inputText id="thesi" value="#{userListBean.newuser.thesi}" />                            
-
+                                <p:message for="thesi" /> 
+                                
                                 <h:outputLabel for="tilefono" value="Τηλέφωνο:" />  
                                 <p:inputText id="tilefono" value="#{userListBean.newuser.thlefwno}" />  
-
+                                <p:message for="tilefono" /> 
+                                
                                 <h:outputLabel for="monada" value="Μονάδα:" />  
                                 <p:inputText id="monada" value="#{userListBean.newuser.mipCode}" />                          
-
+                                <p:message for="monada" /> 
+                                
                                 <h:outputLabel for="diatagi" value="Διαταγή Εγγραφής:" />  
                                 <p:inputText id="diatagi" value="#{userListBean.newuser.dghEggrafhs}" />                             
-
+                                <p:message for="diatagi" /> 
+                                
                                 <h:outputLabel for="rolos" value="Ρόλος:" />  
                                 <p:inputText id="rolos" value="#{userListBean.newuser.bathmos}" />                            
-
+                                <p:message for="rolos" /> 
+                                
                                 <h:outputLabel for="username" value="Όνομα Χρήστη:" />  
                                 <p:inputText id="username" value="#{userListBean.newuser.userId}" />                            
-
+                                <p:message for="username" /> 
+                                
                                 <h:outputLabel for="password" value="Κωδικός Χρήστη:" />  
-                                <p:inputText id="password" value="#{userListBean.newuser.bathmos}" />                            
-
+                                <p:password id="password" value="#{userListBean.newuser.bathmos}" />                            
+                                <p:message for="password" /> 
+                                
                             </h:panelGrid>  
 
-                        <p:commandButton value="All" id="btnAll" process="@all" update="userTable" actionListener="#{userListBean.addUser}"/>  
+                            <p:commandButton value="Αποθήκευση" id="savenewuser" update="newusergrid :listform:userTable" actionListener="#{userListBean.addUser}"  />  
 
                     </p:dialog>                  
-                               
-                    
-                    
+                                                                       
                 </h:form>  
                 
            

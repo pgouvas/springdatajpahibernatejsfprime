@@ -39,8 +39,13 @@ public class UserListBean implements Serializable{
         System.out.println(" onRowSelect: "+selectedItem);
     }
 
+    public void resetNewUser(){
+        System.out.println("resetNewUser invoked() ");
+        newuser = new User();
+    }
     
-    public void addUser(){        
+    public void addUser(){ 
+        System.out.println("addUser invoked() ");
         userdao.save(newuser);
     }    
     

@@ -3,34 +3,19 @@ package gr.army.usermanagement.datamodel;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 /**
  *
  * @author Panagiotis Gouvas (KEPYES 28/5/2012)
  */
+
 @Entity(name="USERS")
-/*
-@Table(name = "USERS", catalog = "", schema = "SXK")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findByTmhma", query = "SELECT u FROM User u WHERE u.tmhma = :tmhma"),
-    @NamedQuery(name = "User.findByThlefwno", query = "SELECT u FROM User u WHERE u.thlefwno = :thlefwno"),
-    @NamedQuery(name = "User.findByKathgoria", query = "SELECT u FROM User u WHERE u.kathgoria = :kathgoria"),
-    @NamedQuery(name = "User.findByThesi", query = "SELECT u FROM User u WHERE u.thesi = :thesi"),
-    @NamedQuery(name = "User.findByFullName", query = "SELECT u FROM User u WHERE u.fullName = :fullName"),
-    @NamedQuery(name = "User.findByBathmos", query = "SELECT u FROM User u WHERE u.bathmos = :bathmos"),
-    @NamedQuery(name = "User.findByEpwnymo", query = "SELECT u FROM User u WHERE u.epwnymo = :epwnymo"),
-    @NamedQuery(name = "User.findByOnomaXrhsth", query = "SELECT u FROM User u WHERE u.onomaXrhsth = :onomaXrhsth"),
-    @NamedQuery(name = "User.findByKwdikosMonados", query = "SELECT u FROM User u WHERE u.kwdikosMonados = :kwdikosMonados"),
-    @NamedQuery(name = "User.findByDghEggrafhs", query = "SELECT u FROM User u WHERE u.dghEggrafhs = :dghEggrafhs"),
-    @NamedQuery(name = "User.findByHmniaEggrafhs", query = "SELECT u FROM User u WHERE u.hmniaEggrafhs = :hmniaEggrafhs"),
-    @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
-    @NamedQuery(name = "User.findByAm", query = "SELECT u FROM User u WHERE u.am = :am"),
-    @NamedQuery(name = "User.findByMipCode", query = "SELECT u FROM User u WHERE u.mipCode = :mipCode"),
-    @NamedQuery(name = "User.findByDorCode", query = "SELECT u FROM User u WHERE u.dorCode = :dorCode")})
-*/
 public class User implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -38,8 +23,11 @@ public class User implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "USER_ID")
+    @NotBlank(message="Το πεδίο είναι υποχρεωτικό")
     private String userId;
     
+    @NotNull
+    @Size(min=2)
     @Column(name = "AM")
     private String am;
     
