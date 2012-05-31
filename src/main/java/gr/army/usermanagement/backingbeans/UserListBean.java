@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import org.primefaces.model.LazyDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,25 +18,31 @@ import org.springframework.stereotype.Component;
  * 
  */
 @Component
-@Scope(value = "request")
+@Scope(value = "session")
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class UserListBean implements Serializable{
 
     private User selectedItem;
     
-    //---LAZY APPROACH 
+    
+    private User newuser = new User();
+        
+    @Autowired
+    private UserRepository userdao;  
+    
     @Autowired
     private LazyUserDataModel allItems;  
     
-    //---EAGER APPROACH
-    /*
-    @Autowired
-    private UserRepository userdao;  
-    private List<User> allItems;  
-    */ 
+    //---Listeners
+    public void onRowSelect(){
+        System.out.println(" onRowSelect: "+selectedItem);
+    }
 
-
+    
+    public void addUser(){        
+        userdao.save(newuser);
+    }    
     
     /**
      * @return the selectedItem
@@ -48,21 +55,10 @@ public class UserListBean implements Serializable{
      * @param selectedItem the selectedItem to set
      */
     public void setSelectedItem(User selectedItem) {
+        System.out.println("Row selected: "+selectedItem );
         this.selectedItem = selectedItem;
     }
-    
-    /*   EAGER APPROACH
-    public List<User> getAllItems() {
-        allItems = userdao.findAll();
-        return allItems;
-    }
 
-    public void setAllItems(List<User> allItems) {
-        
-        this.allItems = allItems;
-    }
-    */
-       
     /*   LAZY APPROACH  */ 
     public LazyUserDataModel getAllItems() {
         return allItems;
@@ -70,6 +66,22 @@ public class UserListBean implements Serializable{
     public void setAllItems(LazyUserDataModel allItems) {
         this.allItems = allItems;
     }
-    
-        
+
+    /**
+     * @return the newuser
+     */
+    public User getNewuser() {
+        return newuser;
+    }
+
+    /**
+     * @param newuser the newuser to set
+     */
+    public void setNewuser(User newuser) {
+        this.newuser = newuser;
+    }
+
+ 
+
+          
 }//EoC

@@ -5,6 +5,7 @@ import gr.army.usermanagement.datamodel.User;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 
@@ -21,8 +22,11 @@ public interface UserRepository extends JpaRepository<User,String>{
 
     public List<User> findByUserIdLike(String userid);    
     
+    @Query("select count (*) from USERS u where u.userId like ?1 ")
+    public long countByUserIdLike(String userid);
+            
     public List<User> findByUserIdLike(String userid,Pageable page);    
-    
+        
     public User findByUserIdAndDorCode(String userid,Long dorcode);    
     
 }

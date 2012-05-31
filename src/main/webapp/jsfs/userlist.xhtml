@@ -13,24 +13,111 @@
             <ui:define name="content">
 
                 <h:form id="form">  
-
+                    
+                    <p:commandButton id="showDialogButton" type="button" value="Δημιουργία νέου χρήστη" onclick="newuserdlg.show()" />
+                    
                     <p:dataTable id="userTable" var="user" value="#{userListBean.allItems}" paginator="true" rows="10"  
                                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
-                                 rowsPerPageTemplate="5,10,15"   >  <!-- selectionMode="single" selection="#{userListBean.selectedItem}" -->
+                                 rowsPerPageTemplate="5,10,15" selectionMode="single"  selection="#{userListBean.selectedItem}"   > 
 
+                        <p:ajax event="rowSelect" listener="#{userListBean.onRowSelect}" update=":form:display" oncomplete="userDialog.show()" /> 
 
-                        <p:column headerText="UserID" sortBy="#{user.userId}" filterBy="#{user.userId}">  
+                        <p:column headerText="Α/Α" sortBy="#{user.userId}" filterBy="#{user.userId}">  
                             <h:outputText value="#{user.userId}" />  
                         </p:column>  
 
-                        <p:column headerText="DORCODE" sortBy="#{user.dorCode}" filterBy="#{user.dorCode}">  
-                            <h:outputText value="#{user.dorCode}" />  
+                        <p:column headerText="Επίθετο" sortBy="#{user.epwnymo}" >  
+                            <h:outputText value="#{user.epwnymo}" />  
+                        </p:column>                         
+                        
+                        <p:column headerText="Όνομα" sortBy="#{user.onomaXrhsth}" >  
+                            <h:outputText value="#{user.onomaXrhsth}" />  
+                        </p:column>                         
+                        
+                        <p:column headerText="Αριθμός Μητρώου" sortBy="#{user.am}" >  
+                            <h:outputText value="#{user.am}" />  
+                        </p:column>                          
+                        
+                        <p:column headerText="Μονάδα" sortBy="#{user.mipCode}" >  
+                            <h:outputText value="#{user.mipCode}" />  
                         </p:column>  
 
                     </p:dataTable>  
 
+                    <p:dialog header="Πληροφορίες Χρήστη" widgetVar="userDialog" resizable="false"  
+                            showEffect="explode" hideEffect="explode">  
 
+                        <h:panelGrid id="display" columns="2" cellpadding="4">  
+
+                            <h:outputText value="A/A:" />  
+                            <h:outputText value="#{userListBean.selectedItem.userId}" style="font-weight:bold"/>  
+
+                            <h:outputText value="Επίθετο:" />  
+                            <h:outputText value="#{userListBean.selectedItem.epwnymo}" style="font-weight:bold"/>  
+                            
+                            <h:outputText value="Όνομα:" />  
+                            <h:outputText value="#{userListBean.selectedItem.onomaXrhsth}" style="font-weight:bold"/>                              
+                            
+                            <h:outputText value="Αριθμός Μητρώου:" />  
+                            <h:outputText value="#{userListBean.selectedItem.am}" style="font-weight:bold"/>                                                       
+                            
+                            <h:outputText value="Κωδικός Μονάδας:" />  
+                            <h:outputText value="#{userListBean.selectedItem.mipCode}" style="font-weight:bold"/>  
+
+                        </h:panelGrid>  
+                    </p:dialog>    
+
+                    <p:dialog header="Δημιουργία νέου Χρήστη" widgetVar="newuserdlg" resizable="false">  
+
+                            <h:panelGrid columns="2" style="margin-bottom:10px"> 
+
+                                <h:outputLabel for="bathmos" value="Βαθμός:" />  
+                                <p:inputText id="bathmos" value="#{userListBean.newuser.bathmos}" />  
+
+                                <h:outputLabel for="oplo" value="Όπλο:" />  
+                                <p:inputText id="oplo" value="#{userListBean.newuser.tmhma}" />                          
+
+                                <h:outputLabel for="am" value="Αριθμός Μητρώου:" />  
+                                <p:inputText id="am" value="#{userListBean.newuser.am}" />                             
+
+                                <h:outputLabel for="epitheto" value="Επίθετο:" />  
+                                <p:inputText id="epitheto" value="#{userListBean.newuser.epwnymo}" />                            
+
+                                <h:outputLabel for="onoma" value="Όνομα:" />  
+                                <p:inputText id="onoma" value="#{userListBean.newuser.onomaXrhsth}" />                            
+
+                                <h:outputLabel for="thesi" value="Θέση:" />  
+                                <p:inputText id="thesi" value="#{userListBean.newuser.thesi}" />                            
+
+                                <h:outputLabel for="tilefono" value="Τηλέφωνο:" />  
+                                <p:inputText id="tilefono" value="#{userListBean.newuser.thlefwno}" />  
+
+                                <h:outputLabel for="monada" value="Μονάδα:" />  
+                                <p:inputText id="monada" value="#{userListBean.newuser.mipCode}" />                          
+
+                                <h:outputLabel for="diatagi" value="Διαταγή Εγγραφής:" />  
+                                <p:inputText id="diatagi" value="#{userListBean.newuser.dghEggrafhs}" />                             
+
+                                <h:outputLabel for="rolos" value="Ρόλος:" />  
+                                <p:inputText id="rolos" value="#{userListBean.newuser.bathmos}" />                            
+
+                                <h:outputLabel for="username" value="Όνομα Χρήστη:" />  
+                                <p:inputText id="username" value="#{userListBean.newuser.userId}" />                            
+
+                                <h:outputLabel for="password" value="Κωδικός Χρήστη:" />  
+                                <p:inputText id="password" value="#{userListBean.newuser.bathmos}" />                            
+
+                            </h:panelGrid>  
+
+                        <p:commandButton value="All" id="btnAll" process="@all" update="userTable" actionListener="#{userListBean.addUser}"/>  
+
+                    </p:dialog>                  
+                               
+                    
+                    
                 </h:form>  
+                
+           
             </ui:define>
 
         </ui:composition>
