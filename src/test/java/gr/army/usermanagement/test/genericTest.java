@@ -11,6 +11,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Panagiotis Gouvas ( KEPYES 29/5/2012 )
  * Please note that in @ContextConfiguration the file: notation is used instead of the class:
  */
-@Ignore
+//@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:**/WEB-INF/applicationContext.xml"})
 public class genericTest {
@@ -37,8 +41,19 @@ public class genericTest {
         Assert.assertNotNull(userdao);
     }
     
-    //@Test
-    //@Transactional
+    @Test
+    public void testPaging(){
+        //Page<User> upage = userdao.findAll(new PageRequest(5, 15, Sort.Direction.ASC,"userId"));
+        //System.out.println(upage.getContent());
+        
+        userdao.count();
+        //userdao.findAll().size();
+        
+    }    
+    
+    @Ignore
+    @Test
+    @Transactional
     public void addUser(){
         Random rand = new Random();
         Long long1 = rand.nextLong();
@@ -49,8 +64,8 @@ public class genericTest {
         //log.info( " newuser:"+newuser );  
     }
     
-    //@Test
-    //@Transactional
+    @Ignore
+    @Test
     public void testMain(){
         try{
             //log.info( " count:"+userdao.count() );

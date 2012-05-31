@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+    <body>
+        <ui:composition template="/templates/template.xhtml">
+
+            <ui:define name="title"> Επιλογή Χρηστών </ui:define>
+            <ui:define name="content">
+
+                <h:form id="form">  
+
+                    <p:dataTable id="userTable" var="user" value="#{userListBean.allItems}" paginator="true" rows="10"  
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  
+                                 rowsPerPageTemplate="5,10,15"   >  <!-- selectionMode="single" selection="#{userListBean.selectedItem}" -->
+
+
+                        <p:column headerText="UserID" sortBy="#{user.userId}" filterBy="#{user.userId}">  
+                            <h:outputText value="#{user.userId}" />  
+                        </p:column>  
+
+                        <p:column headerText="DORCODE" sortBy="#{user.dorCode}" filterBy="#{user.dorCode}">  
+                            <h:outputText value="#{user.dorCode}" />  
+                        </p:column>  
+
+                    </p:dataTable>  
+
+
+                </h:form>  
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>
