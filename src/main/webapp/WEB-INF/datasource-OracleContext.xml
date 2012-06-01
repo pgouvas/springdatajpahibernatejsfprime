@@ -10,7 +10,7 @@
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" /> <!-- ORD{dataSource.driverClass} -->
- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.9.200.91:1521:sdepdev" /> <!-- ORD{dataSource.protocol}ORD{dataSource.host}:ORD{dataSource.port}:ORD{dataSource.database} -->
+ 		<property name="jdbcUrl" value="jdbc:oracle:thin:@xxx.xx.xxx.xx:1521:xxxxdev" /> <!-- ORD{dataSource.protocol}ORD{dataSource.host}:ORD{dataSource.port}:ORD{dataSource.database} -->
 		<property name="user" value="sxk" />   <!-- ORD{dataSource.user} -->
 		<property name="password" value="sxk" />    <!-- ORD{dataSource.password} -->
 		<property name="minPoolSize" value="5" />  <!-- ORD{dataSource.minPoolSize} -->
