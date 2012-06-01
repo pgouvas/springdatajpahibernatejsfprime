@@ -7,6 +7,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.EditableValueHolder;
+import javax.faces.component.UIComponent;
+import org.primefaces.event.CloseEvent;
 import org.primefaces.model.LazyDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -39,13 +42,28 @@ public class UserListBean implements Serializable{
         System.out.println(" onRowSelect: "+selectedItem);
     }
 
-    public void resetNewUser(){
+    public void handleClose(CloseEvent event) {  
         System.out.println("resetNewUser invoked() ");
+        //Reset Model
         newuser = new User();
-    }
+        //Reset the UI
+        resetForm(event.getComponent());
+        
+    }     
+       
+    
+  public void resetForm(UIComponent form) {  
+    for (UIComponent uic : form.getChildren()) {  
+      if (uic instanceof EditableValueHolder) {  
+        EditableValueHolder evh=(EditableValueHolder)uic;  
+        evh.resetValue();  
+      }  
+      resetForm(uic);  
+    }  
+  }     
     
     public void addUser(){ 
-        System.out.println("addUser invoked() ");
+        System.out.println("addUser() invoked");
         userdao.save(newuser);
     }    
     

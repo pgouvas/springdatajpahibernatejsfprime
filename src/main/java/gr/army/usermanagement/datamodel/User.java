@@ -54,8 +54,10 @@ public class User implements Serializable {
     @Column(name = "ONOMA_XRHSTH")
     private String onomaXrhsth;
     @Column(name = "KWDIKOS_MONADOS")
-    private String kwdikosMonados;
+    private String kwdikosMonados;   
     @Column(name = "DGH_EGGRAFHS")
+    
+    @NotBlank(message="Το πεδίο Διαταγή είναι υποχρεωτικό")
     private String dghEggrafhs;
     @Column(name = "HMNIA_EGGRAFHS")
     @Temporal(TemporalType.TIMESTAMP)

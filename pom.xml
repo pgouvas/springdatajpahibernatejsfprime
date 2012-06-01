@@ -142,10 +142,18 @@
         <!-- MySQL Drivers-->
         
         <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.version}</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
         </dependency>     
+        
+        <!-- Oracle Drivers 
+	<dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.1.0</version>
+	</dependency>
+        -->
         
         <!-- c3p0 Connection Pooling-->
         <dependency>
