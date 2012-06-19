@@ -42,7 +42,7 @@ public class genericTest {
         Assert.assertNotNull(userdao);
     }
     
-    //@Ignore
+    @Ignore
     @Test
     public void testPaging(){
         Page<User> upage = userdao.findAll(new PageRequest(5, 15, Sort.Direction.ASC,"userId"));
@@ -61,15 +61,19 @@ public class genericTest {
         
     }    
     
-    @Ignore
+    //@Ignore
     @Test
-    @Transactional
-    public void addUser(){
+    //@Transactional
+    public void testAddUser(){
         Random rand = new Random();
         Long long1 = rand.nextLong();
         User newuser = new User(""+long1);
         newuser.setDorCode(long1+1);
         newuser.setMipCode(long1+2);
+        newuser.setEpwnymo("Γκουβάς");
+        newuser.setOnomaXrhsth("pgouvas");
+        newuser.setDghEggrafhs("122345");
+        newuser.setAm(""+long1);
         userdao.save(newuser);
         //log.info( " newuser:"+newuser );  
     }

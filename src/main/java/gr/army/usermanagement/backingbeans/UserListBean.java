@@ -42,13 +42,20 @@ public class UserListBean implements Serializable{
         System.out.println(" onRowSelect: "+selectedItem);
     }
 
+    public void handleEditFormClose(CloseEvent event) {  
+        System.out.println("handleEditFormClose invoked() ");
+        //Reset the affected Model
+        selectedItem = new User();
+        //Reset the UI
+        resetForm(event.getComponent());        
+    }         
+    
     public void handleClose(CloseEvent event) {  
-        System.out.println("resetNewUser invoked() ");
-        //Reset Model
+        System.out.println("handleClose invoked() ");
+        //Reset the affected Model
         newuser = new User();
         //Reset the UI
-        resetForm(event.getComponent());
-        
+        resetForm(event.getComponent());        
     }     
        
     
@@ -65,6 +72,16 @@ public class UserListBean implements Serializable{
     public void addUser(){ 
         System.out.println("addUser() invoked");
         userdao.save(newuser);
+    }    
+    
+    public void updateUser(){
+        System.out.println("updateUser() invoked");
+        userdao.save(selectedItem);
+    }
+    
+    public void removeUser(){
+        System.out.println("removeUser() invoked");
+        userdao.delete(selectedItem);
     }    
     
     /**

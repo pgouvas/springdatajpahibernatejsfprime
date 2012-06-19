@@ -59,11 +59,17 @@ public class User implements Serializable {
     
     @NotBlank(message="Το πεδίο Διαταγή είναι υποχρεωτικό")
     private String dghEggrafhs;
+   
     @Column(name = "HMNIA_EGGRAFHS")
     @Temporal(TemporalType.TIMESTAMP)
     private Date hmniaEggrafhs;
-
-
+    
+    @Transient
+    private String password;
+    
+    @Transient
+    private String password2;
+    
     public User() {
     }
 
@@ -215,6 +221,34 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "gr.army.usermanagement.datamodel.User[ userId=" + userId + " ]";
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * @return the password2
+     */
+    public String getPassword2() {
+        return password2;
+    }
+
+    /**
+     * @param password2 the password2 to set
+     */
+    public void setPassword2(String password2) {
+        this.password2 = password2;
     }
 
 
